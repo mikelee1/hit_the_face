@@ -1,5 +1,5 @@
-const APP_ID = 'wxaf249daf125d652c';//输入小程序appid  
-const APP_SECRET = '60fae25477b536fb02dac1755f4b3dbe';//输入小程序app_secret  
+const APP_ID = 'xiaochengxuid';//输入小程序appid  
+const APP_SECRET = 'app_secret';//输入小程序app_secret  
 var OPEN_ID = ''//储存获取到openid  
 var SESSION_KEY = ''//储存获取到session_key  
 //app.js
@@ -59,7 +59,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl:'http://mikelee.vip.guyubao.com',
+    baseUrl:'server_path',
     inputimg:null,
     imgpath: '/images/igglybuff.png',
     session_key:null,
