@@ -1,0 +1,4 @@
+<!--pages/openid/openid.wxml-->
+<text>pages/openid/openid.wxml</text>
+<image src='{{scrollimage}}'></image>
+

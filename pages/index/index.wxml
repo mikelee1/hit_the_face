@@ -1,0 +1,21 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+  <image  src="/images/zhangyishan.jpg" background-size="cover"></image>
+    <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <view>openid:{{openid}}</view>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block> -->
+  </view>
+<view>
+
+<text class='userinfo-nickname'>head photo:</text>
+<image id='img' src='{{imgpath}}' class='imagestyle' mode='widthFix'></image>
+<image src='{{scrollimage}}'></image>
+<button bindtap='changephoto'>change</button>
+<button bindtap='search'>search</button>
+<text class="userinfo-nickname">usage:按change选择一张自己的头像或者拍摄,然后点击search</text>
+</view>
+</view>

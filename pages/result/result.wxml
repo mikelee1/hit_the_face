@@ -1,0 +1,8 @@
+<!--pages/result.wxml-->
+<text>result:</text>
+<block>
+<text class='userinfo'>yuantu:</text>
+<image mode='widthFix' src="{{imgpath}}"></image>
+<text class='userinfo'>fanhui:</text>
+    <image mode='widthFix' src="{{inputimg}}"></image>
+</block>
