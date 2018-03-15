@@ -1,21 +1,30 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-  <image  src="/images/zhangyishan.jpg" background-size="cover"></image>
-    <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <view>openid:{{openid}}</view>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block> -->
-  </view>
-<view>
 
-<text class='userinfo-nickname'>head photo:</text>
-<image id='img' src='{{imgpath}}' class='imagestyle' mode='widthFix'></image>
-<image src='{{scrollimage}}'></image>
-<button bindtap='changephoto'>change</button>
-<button bindtap='search'>search</button>
-<text class="userinfo-nickname">usage:按change选择一张自己的头像或者拍摄,然后点击search</text>
-</view>
+<view class="index-container ">
+  
+  <view class="index-title">
+    <text> 茫茫人海，谁与你长的最像？</text>
+  </view>
+
+  <view class='exam-text'>
+    <text>示例：选择张一山的头像匹配出夏雨</text>  
+  </view>
+
+  <view class='exam-img'>
+    <image src="/images/zhangyishan.jpg"></image>
+  </view>
+
+  <view  class='upload-img'>
+    <image  wx:if ="{{showIf==''}}" id='img' src='{{imgpath}}' class='imagestyle' mode='widthFix'></image>
+    <image wx:else src='{{scrollimage}}' class='imagestyle' mode='widthFix'></image>
+  </view>
+
+
+  <view class='choose-img btn'>
+    <button  plain='true' class='choose-btn' bindtap='upload'>
+      <span class="btn-bg">选择照片</span>
+    </button>
+  </view>
+  <view class='search-img btn'> 
+    <button  plain='true' class='search-btn' bindtap='search'><span class="btn-bg">搜 索</span></button> 
+  </view>
 </view>

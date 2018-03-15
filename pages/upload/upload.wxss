@@ -1,0 +1,20 @@
+@import "common.wxss";
+
+.cropper{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.cropper-buttons{
+    background-color: rgba(0, 0, 0, 0.95);
+    color: #04b00f;
+}
+
+.cropper-buttons .upload, .cropper-buttons .getCropperImage{
+    width: 50%;
+    text-align: center;
+    position: fiexd;
+bottom: 90%;
+}
+

@@ -1,13 +1,29 @@
 //index.js
 //获取应用实例
 const app = getApp()
-var timer = 7
+var timer = 15
+var close = false
 Page({
   data: {
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+        showIf: ''//新增的
+  },
+  upload() {
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success(res) {
+        const src = res.tempFilePaths[0]
+
+        wx.redirectTo({
+          url: `../upload/upload?src=${src}`
+        })
+      }
+    })
   },
   //事件处理函数
   bindViewTap: function() {
@@ -16,7 +32,7 @@ Page({
     })
   },
   bindButtonTap:function(event){
-    console.log(event)
+
     wx.request({
       url: app.globalData.baseUrl+'/test',
       success: function (res) {
@@ -44,19 +60,32 @@ Page({
      }
    })
  },
+//  uploadimg:function(){
+//   wx.navigateTo({
+//     url: '../upload/upload',
+//   })
+//  },
 
  search:function(){
+
+   this.setData({//新增
+     showIf: 'show'
+   })
+
+   close = false
     timer = 7
-   var data1 = this.data.imgpath;
+   var data1 = app.globalData.imgpath;
+   console.log(data1)
     wx.uploadFile({
       url: app.globalData.baseUrl + '/dopuploadimg/',
-      filePath: data1[0],
+      filePath: data1,
       name: 'file',
       formData: {
         'userid': app.globalData.openid,
         'nickname':app.globalData.nickname
       },
       success:function(res){
+        close = true
         console.log(res)
         var resultimg = res.data
         var that = this
@@ -90,8 +119,9 @@ Page({
  },
 
   onLoad: function () {
+    
     if (app.globalData.userInfo) {
-      console.log(app.globalData.imgpath)
+      console.log(app)
       this.setData({
         imgpath: app.globalData.imgpath,
         userInfo: app.globalData.userInfo,
@@ -103,6 +133,7 @@ Page({
       // 所以此处加入 callback 以防止这种情况
       
       app.userInfoReadyCallback = res => {
+        console.log(res);
         app.globalData.nickname = res.userInfo.nickName;
         this.setData({
           imgpath: app.globalData.imgpath,
@@ -132,22 +163,23 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true,
       imgpath:null,
-
-    })
-    
+    }) 
   }
 })
 
 
 function minus(that) {
-  if (timer < 1) {
-    // timer = 7
-    // minus(that)
-    console.log('out')
+  if (close) {
+    app.globalData.scrollimage = '/images/4.jpg',
+      that.setData({
+        scrollimage: app.globalData.scrollimage
+      })
   } else {
-    app.globalData.scrollimage = '/images/' + timer + '.jpg',
-      timer = timer - 1,
-      console.log(timer)
+      app.globalData.scrollimage = '/images/' + timer + '.jpg',
+      timer = timer - 1;
+      if (timer < 1){
+        timer = 7
+      }
     setTimeout(function () {
       that.setData({
         scrollimage: app.globalData.scrollimage

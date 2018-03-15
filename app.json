@@ -2,11 +2,9 @@
   "pages": [
 
     "pages/index/index",
-    "pages/logs/logs",
     "pages/result/result",
-            "pages/openid/openid"
-
-
+    "pages/upload/upload",
+        "pages/share/share"
   ],
   "window": {
     "backgroundTextStyle": "light",

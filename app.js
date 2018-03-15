@@ -1,5 +1,3 @@
-const APP_ID = 'xiaochengxuid';//输入小程序appid  
-const APP_SECRET = 'app_secret';//输入小程序app_secret  
 var OPEN_ID = ''//储存获取到openid  
 var SESSION_KEY = ''//储存获取到session_key  
 //app.js
@@ -17,22 +15,15 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         wx.request({
           //获取openid接口  
-          url: 'https://api.weixin.qq.com/sns/jscode2session',
-          data: {
-            appid: APP_ID,
-            secret: APP_SECRET,
-            js_code: res.code,
-            grant_type: 'authorization_code'
-          },
+          data: { js_code: res.code},
+          url: this.globalData.baseUrl +'/dopgetopenid/',
           method: 'GET',
           success: function (res) {
-            console.log(res.data);
-            OPEN_ID = res.data.openid;//获取到的openid  
-            SESSION_KEY = res.data.session_key;//获取到session_key  
-            console.log(OPEN_ID)
-            console.log(SESSION_KEY.length)
+            OPEN_ID = res.data;//获取到的openid  
             that.globalData.openid = OPEN_ID
-            
+          },
+          fail:function(e){
+            console.log(e)
           }
         })
       }
@@ -59,12 +50,15 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl:'server_path',
+    baseUrl:'https://www.liyuanye.club',
+    // baseUrl: 'http://127.0.0.1:8091',
     inputimg:null,
     imgpath: '/images/igglybuff.png',
     session_key:null,
     openid:null,
     nickname:null,
-    scrollimage:null
+    scrollimage:null,
+    qrpath: null,
+    moneyqr:null
   }
 })

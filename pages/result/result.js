@@ -17,10 +17,11 @@ Page({
     if (app.globalData.inputimg){
       this.setData({
         imgpath:app.globalData.imgpath,
-        inputimg: app.globalData.inputimg
+        inputimg: app.globalData.inputimg,
+        moneyqr: app.globalData.moneyqr
       })
     }else{
-
+      console.log('no images return')
     }
   },
 
@@ -36,6 +37,8 @@ Page({
    */
   onShow: function () {
   
+
+
   },
 
   /**
@@ -66,10 +69,57 @@ Page({
   
   },
 
+
+  money:function(){
+    var imgmo = app.globalData.baseUrl + '/static/moneyqr.jpg';
+    wx.previewImage({
+      urls: imgmo.split(','),
+      // 需要预览的图片http链接  使用split把字符串转数组。不然会报错  
+    })
+    // app.globalData.moneyqr='../../images/moneyqr.jpg'
+    
+  },
+
+
+  // previewImage: function (e) {
+  //   wx.previewImage({
+  //     urls: this.data.scene.split(',')
+  //     // 需要预览的图片http链接  使用split把字符串转数组。不然会报错  
+  //   })
+  // }  ,
+
   /**
    * 用户点击右上角分享
    */
+
+  share:function(){
+    wx.navigateTo({
+      url: '../share/share',
+    })
+    wx.request({
+      url: app.globalData.baseUrl +'/dopgetwxqrcode/',
+      success:function(res){
+        console.log(res.data)
+        // app.globalData.qrpath = res.data
+        app.globalData.qrpath = '../../images/qrcode.jpg'
+
+      }
+    })
+  },
+
   onShareAppMessage: function () {
-  
-  }
+
+    return {
+
+      title: '自定义分享标题',
+
+      desc: '自定义分享描述',
+
+      path: '/'
+
+    }
+
+  },
+
+
 })
