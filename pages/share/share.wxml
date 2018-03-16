@@ -1,7 +1,13 @@
 <view>
-    <canvas style="width:100%;height:{{contentHeight}}px" canvas-id="myCanvas"></canvas>
+    <!-- <canvas style="width:100%;height:{{contentHeight}}px" canvas-id="myCanvas"></canvas> -->
+
+<view  class="mask"></view>
+<view class="canvas-box">
+    <canvas  style="width: {{windowWidth}}px;height: {{windowHeight}}px;" canvas-id="myCanvas"/>
+</view>
 
      <view class="edit-footer">
         <button class="button-done" type="primary" bindtap="savePic">保存图片</button>
     </view>
 </view>
+

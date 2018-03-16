@@ -59,6 +59,8 @@ App({
     nickname:null,
     scrollimage:null,
     qrpath: null,
-    moneyqr:null
+    moneyqr:null,
+    screenwidth :wx.getSystemInfoSync().windowWidth,
+    screenheight:wx.getSystemInfoSync().windowHeight
   }
 })

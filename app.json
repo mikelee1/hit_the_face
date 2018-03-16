@@ -5,6 +5,8 @@
     "pages/result/result",
     "pages/upload/upload",
         "pages/share/share"
+
+
   ],
   "window": {
     "backgroundTextStyle": "light",

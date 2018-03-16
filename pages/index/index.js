@@ -87,8 +87,11 @@ Page({
       success:function(res){
         close = true
         console.log(res)
-        var resultimg = res.data
+        var result = JSON.parse(res.data)
+        var resultimg = result.msg
+        var test = result.test
         var that = this
+        console.log(test)
         if (resultimg == ''){
           wx.showToast({
             title: 'no suitable',

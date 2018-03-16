@@ -15,11 +15,12 @@
  .main-right{
      width:90%;
        height:100%;
-       /* background:pink;    */
-     float:right; 
+
+     /* float:right;  */
      align-items: center;
      
  }
+
 
  .sharebutton{
 float:left;
@@ -34,4 +35,9 @@ width:20%;
    margin-right: 20%;
    width: 20%
 
+ }
+
+
+ .forimg{
+   width: 20%;
  }
