@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.91",
 	"appid": "wxaf249daf125d652c",
-	"projectname": "wxprogram",
+	"projectname": "wxprogram_nocoin",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

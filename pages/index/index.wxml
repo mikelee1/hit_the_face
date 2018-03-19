@@ -1,6 +1,6 @@
 
 <view class="index-container ">
-  
+ 
   <view class="index-title">
     <text> 茫茫人海，谁与你长的最像？</text>
   </view>
@@ -24,7 +24,9 @@
       <span class="btn-bg">选择照片</span>
     </button>
   </view>
+ 
   <view class='search-img btn'> 
     <button  plain='true' class='search-btn' bindtap='search'><span class="btn-bg">搜 索</span></button> 
   </view>
+
 </view>

@@ -37,9 +37,6 @@ Page({
         wx.redirectTo({
           url: `../index/index?imgpath=${avatar}`
         })
-        // wx.navigateTo({
-        //   url: `../index/index?imgpath=${avatar}`,
-        // })
       } else {
         console.log('获取图片失败，请稍后重试')
       }
@@ -67,11 +64,10 @@ Page({
       cropperOpt.src = option.src
       new WeCropper(cropperOpt)
         .on('ready', (ctx) => {
-          console.log(`wecropper is ready for work!`)
+
         })
         .on('beforeImageLoad', (ctx) => {
-          console.log(`before picture loaded, i can do something`)
-          console.log(`current canvas context:`, ctx)
+
           wx.showToast({
             title: '上传中',
             icon: 'loading',
@@ -79,13 +75,11 @@ Page({
           })
         })
         .on('imageLoad', (ctx) => {
-          console.log(`picture loaded`)
-          console.log(`current canvas context:`, ctx)
+
           wx.hideToast()
         })
         .on('beforeDraw', (ctx, instance) => {
-          console.log(`before canvas draw,i can do something`)
-          console.log(`current canvas context:`, ctx)
+
         })
         .updateCanvas()
     }

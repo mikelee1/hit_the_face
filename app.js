@@ -45,13 +45,17 @@ App({
             }
           })
         }
+
+
+
+
+
       }
     })
   },
   globalData: {
     userInfo: null,
     baseUrl:'https://www.liyuanye.club',
-    // baseUrl: 'http://127.0.0.1:8091',
     inputimg:null,
     imgpath: '/images/igglybuff.png',
     session_key:null,
@@ -61,6 +65,7 @@ App({
     qrpath: null,
     moneyqr:null,
     screenwidth :wx.getSystemInfoSync().windowWidth,
-    screenheight:wx.getSystemInfoSync().windowHeight
+    screenheight:wx.getSystemInfoSync().windowHeight,
+    totalnum:0
   }
 })

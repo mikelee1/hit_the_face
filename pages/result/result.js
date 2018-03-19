@@ -7,15 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    totalnum: app.globalData.totalnum
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+  
+
+
     if (app.globalData.inputimg){
       this.setData({
+        totalnum:app.globalData.totalnum,
         imgpath:app.globalData.imgpath,
         inputimg: app.globalData.inputimg,
         moneyqr: app.globalData.moneyqr
@@ -71,40 +75,52 @@ Page({
 
 
   money:function(){
-    var imgmo = app.globalData.baseUrl + '/static/moneyqr.jpg';
-    wx.previewImage({
-      urls: imgmo.split(','),
-      // 需要预览的图片http链接  使用split把字符串转数组。不然会报错  
+    this.setData({
+      haveclick:true
     })
-    // app.globalData.moneyqr='../../images/moneyqr.jpg'
-    
+    console.log(this.data.totalnum)
+    this.setData({
+      totalnum:this.data.totalnum+1
+    })
+
+    wx.request({
+      url: app.globalData.baseUrl + '/dopupdatethumbup/',
+      
+      data: { wxid: app.globalData.openid,thumb:'true'},
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },  
+      method:'post',
+      success:function(){
+        console.log('success update thumb')
+      }
+      
+    })
+
+    console.log(this.data.totalnum)
   },
 
-
-  // previewImage: function (e) {
-  //   wx.previewImage({
-  //     urls: this.data.scene.split(',')
-  //     // 需要预览的图片http链接  使用split把字符串转数组。不然会报错  
-  //   })
-  // }  ,
+  imgclick: function (event) {
+    console.log(event)
+    var imgm = event.currentTarget.dataset.id;
+    wx.previewImage({
+      urls: imgm.split(','),
+      // 需要预览的图片http链接  使用split把字符串转数组。不然会报错  
+    })
+  },
 
   /**
    * 用户点击右上角分享
    */
 
   share:function(){
+    app.globalData.qrpath = '../../images/qrcode.jpg'
     wx.navigateTo({
       url: '../share/share',
     })
-    wx.request({
-      url: app.globalData.baseUrl +'/dopgetwxqrcode/',
-      success:function(res){
-        console.log(res.data)
         // app.globalData.qrpath = res.data
-        app.globalData.qrpath = '../../images/qrcode.jpg'
 
-      }
-    })
+
   },
 
   onShareAppMessage: function () {
@@ -120,6 +136,10 @@ Page({
     }
 
   },
+
+  data:{
+    haveclick:false
+  }
 
 
 })

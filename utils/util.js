@@ -51,7 +51,7 @@ function savePicToAlbum(tempFilePath) {
               filePath: tempFilePath,
               success(res) {
                 wx.showToast({
-                  title: '保存成功'
+                  title: '图片已保存到相册，赶紧晒一下吧~'
                 });
               },
               fail(res) {
@@ -76,7 +76,7 @@ function savePicToAlbum(tempFilePath) {
           filePath: tempFilePath,
           success(res) {
             wx.showToast({
-              title: '保存成功',
+              title: '图片已保存到相册，赶紧晒一下吧~',
             });
           },
           fail(res) {

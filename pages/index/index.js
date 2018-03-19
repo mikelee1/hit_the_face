@@ -5,12 +5,14 @@ var timer = 15
 var close = false
 Page({
   data: {
+    imgpath: app.globalData.imgpath,
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
         showIf: ''//新增的
   },
+  
   upload() {
     wx.chooseImage({
       count: 1, // 默认9
@@ -26,24 +28,6 @@ Page({
     })
   },
   //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  bindButtonTap:function(event){
-
-    wx.request({
-      url: app.globalData.baseUrl+'/test',
-      success: function (res) {
-        console.log(res.data)
-      },
-      error:function(e){
-        console.log(e)
-      }
-    })
-  },
-
  changephoto:function(){
    var that = this
    wx.chooseImage({
@@ -60,11 +44,7 @@ Page({
      }
    })
  },
-//  uploadimg:function(){
-//   wx.navigateTo({
-//     url: '../upload/upload',
-//   })
-//  },
+
 
  search:function(){
 
@@ -92,20 +72,21 @@ Page({
         var test = result.test
         var that = this
         console.log(test)
-        if (resultimg == ''){
+        if (resultimg == 'no head'){
           wx.showToast({
-            title: 'no suitable',
+            title: '照片中无人脸',
             duration: 4000
           })
 
-        }else if (resultimg == 'no head'){
+        }else if (resultimg == ''){
           wx.showToast({
-            title: 'no head',
+            title: '未找到匹配照',
             duration: 4000
           })
 
         }else{
-          app.globalData.inputimg = resultimg
+          app.globalData.inputimg = resultimg;
+          app.globalData.totalnum = result.totalnum;
           wx.navigateTo({
             url: '../result/result',
             success: function () {
@@ -120,10 +101,15 @@ Page({
     })
     minus(this)
  },
-
+ onShow:function(){
+   this.setData({
+     imgpath:app.globalData.imgpath
+   })
+ },
   onLoad: function () {
-    
+
     if (app.globalData.userInfo) {
+      console.log('333')
       console.log(app)
       this.setData({
         imgpath: app.globalData.imgpath,
@@ -134,7 +120,7 @@ Page({
     } else if (this.data.canIUse){
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
-      
+      console.log('111')
       app.userInfoReadyCallback = res => {
         console.log(res);
         app.globalData.nickname = res.userInfo.nickName;
@@ -147,9 +133,12 @@ Page({
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
+      console.log('222')
+      this.data.imgpath = app.globalData.imgpath,
       wx.getUserInfo({
         success: res => {
           console.log(res)
+          
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
