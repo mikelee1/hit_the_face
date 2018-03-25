@@ -6,6 +6,7 @@ var close = false
 Page({
   data: {
     imgpath: app.globalData.imgpath,
+    headimgpath: app.globalData.headimgpath,
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
@@ -77,8 +78,8 @@ Page({
 
     close = false
     timer = 7
-    var data1 = app.globalData.imgpath;
-    console.log(data1)
+    var data1 = app.globalData.headimgpath;
+
     wx.uploadFile({
       url: app.globalData.baseUrl + '/prankuploadimg/',
       filePath: data1,
@@ -151,7 +152,7 @@ Page({
 
    close = false
     timer = 7
-   var data1 = app.globalData.imgpath;
+    var data1 = app.globalData.headimgpath;
    console.log(data1)
     wx.uploadFile({
       url: app.globalData.baseUrl + '/dopuploadimg/',
@@ -207,7 +208,7 @@ Page({
  onShow:function(){
    console.log(app.globalData.chooseimagebut)
    this.setData({
-     imgpath:app.globalData.imgpath,
+     headimgpath: app.globalData.headimgpath,
      chooseimagebut:app.globalData.chooseimagebut,
      items: app.globalData.items
    })
@@ -227,7 +228,7 @@ Page({
     }else{
       if (app.globalData.userInfo) {
         this.setData({
-          imgpath: app.globalData.imgpath,
+          headimgpath: app.globalData.headimgpath,
           userInfo: app.globalData.userInfo,
           hasUserInfo: true,
           openid: app.globalData.openid
@@ -250,7 +251,7 @@ Page({
       } else {
         // 在没有 open-type=getUserInfo 版本的兼容处理
         console.log('222')
-        this.data.imgpath = app.globalData.imgpath,
+        this.data.headimgpath = app.globalData.headimgpath,
           wx.getUserInfo({
             success: res => {
               console.log(res)

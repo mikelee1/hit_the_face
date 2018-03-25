@@ -41,7 +41,7 @@ Page({
 
         //2. canvas绘制文字和图片(startx,starty,imgwidth,imgheight)
         const ctx = wx.createCanvasContext('myCanvas');
-        var leftimg = app.globalData.imgpath;
+        var leftimg = app.globalData.headimgpath;
         var rightimg = res.tempFilePath;
         // var leftimg = '../../images/1.jpg'
         // var rightimg = '../../images/3.jpg'

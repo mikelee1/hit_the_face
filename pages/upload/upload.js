@@ -33,9 +33,9 @@ Page({
     this.wecropper.getCropperImage((avatar) => {
       if (avatar) {
         //  获取到裁剪后的图片
-        app.globalData.imgpath=avatar;
+        app.globalData.headimgpath=avatar;
         wx.redirectTo({
-          url: `../index/index?imgpath=${avatar}&startsearch=true`
+          url: `../index/index?headimgpath=${avatar}&startsearch=true`
         })
       } else {
         console.log('获取图片失败，请稍后重试')
