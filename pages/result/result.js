@@ -119,8 +119,6 @@ Page({
       url: '../share/share',
     })
         // app.globalData.qrpath = res.data
-
-
   },
 
   onShareAppMessage: function () {

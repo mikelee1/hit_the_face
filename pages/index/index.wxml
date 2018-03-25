@@ -1,32 +1,39 @@
 
 <view class="index-container ">
- 
-  <view class="index-title">
-    <text> 茫茫人海，谁与你长的最像？</text>
+  <view class='bg-img'>
+    <image src='/images/background.jpg' ></image>
+     <!-- bindload='autoImage' style='width:{{auto[index].width}}rpx;data-index="{{index}}"  -->
   </view>
 
-  <view class='exam-text'>
-    <text>示例：选择张一山的头像匹配出夏雨</text>  
-  </view>
+  <view class='upper'>
+    <view class="index-title">
+      <text> 茫茫人海，谁与你长的最像？</text>
+    </view>
 
-  <view class='exam-img'>
-    <image src="/images/zhangyishan.jpg"></image>
-  </view>
+    <view class='exam-text'>
+      <text>示例：选择张一山的头像匹配出夏雨</text>  
+    </view>
 
-  <view  class='upload-img'>
-    <image  wx:if ="{{showIf==''}}" id='img' src='{{imgpath}}' class='imagestyle' mode='widthFix'></image>
-    <image wx:else src='{{scrollimage}}' class='imagestyle' mode='widthFix'></image>
-  </view>
+    <view class='exam-img'>
+      <image src="/images/zhangyishan.jpg"></image>
+    </view>
+
+    <view  class='upload-img'>
+      <image  wx:if ="{{showIf==''}}" id='img' src='{{imgpath}}' class='imagestyle' mode='widthFix'></image>
+      <image wx:else src='{{scrollimage}}' class='imagestyle' mode='widthFix'></image>
+    </view>
 
 
-  <view class='choose-img btn'>
-    <button  plain='true' class='choose-btn' bindtap='upload'>
-      <span class="btn-bg">选择照片</span>
-    </button>
-  </view>
- 
-  <view class='search-img btn'> 
-    <button  plain='true' class='search-btn' bindtap='search'><span class="btn-bg">搜 索</span></button> 
-  </view>
+    <view class='choose-img btn'>
+      <button   class='choose-btn' bindtap='upload' disabled='{{chooseimagebut}}'>
+        <!-- <span class="btn-bg"></span> -->
+        选择照片
+      </button>
+    </view>
+  
+    <!-- <view class='search-img btn'> 
+      <button  plain='true' class='search-btn' bindtap='search'><span class="btn-bg">搜 索</span></button> 
+    </view> -->
 
+  </view>
 </view>

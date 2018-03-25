@@ -1,1 +1,22 @@
 /* pages/share/share.wxss */
+.bg-img{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 0;
+}
+.bg-img image{
+  width: 100%;
+  height: 100%;
+}
+.canvas-box{
+  position: relative;
+  z-index: 100;
+}
+.edit-footer{
+  margin:0 auto;
+  margin-top: 20rpx;
+  width: 70%;
+  border: 1px solid greenyellow;
+  border-radius: 30rpx;
+}

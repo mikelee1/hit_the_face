@@ -1,33 +1,46 @@
-<view >
-    <view >        
 
-        <!-- <view class="weui-flex">
-            <view class="weui-flex__item"><image id='img' src='{{imgpath}}' class='main-left' mode='widthFix'></image></view>
-            <view  class="weui-flex__item">
-                  <image src='{{inputimg}}' class='main-right'  mode='widthFix'></image>
-            </view>
-        </view> -->
-
+    <view class='result-container'>       
+        <view class='bg-img'>
+          <image src='/images/result1.jpg' ></image>
+        </view>
         <view  class="weui-flex" >
-            <view class="weui-flex__item"><image id='img' src='{{imgpath}}' class='main-left' mode='widthFix'></image></view>
-            <view class='forimg'>
-            <view wx:for="{{inputimg}}" wx:for-index="a" wx:for-item="b" class="weui-flex__item">
-                  <image src='{{b.img}}' class='main-right'  mode='widthFix' bindtap='imgclick' data-id='{{b.img}}'></image>
+            <view class='weui-flex-title'>
+                <span>哇，原来和我最像的是你！</span>
             </view>
+            <view class="weui-flex__item origin-img ">
+              <image id='img' src='{{imgpath}}' class='main-left ' mode='widthFix'></image>
+            </view>
+            <view class='forimg'>
+              <!-- <view wx:for="{{inputimg}}" wx:for-index="a" wx:for-item="b" class="weui-flex__item">
+                  <image src='{{b.img}}' class='main-right'  mode='widthFix' bindtap='imgclick' data-id='{{b.img}}'> 
+                  </image> 
+              </view> -->
+                <view wx:for="{{inputimg}}" wx:for-item="b" class="weui-flex__item">
+                  <image src='{{b.img}}' class='main-right'  mode='widthFix' bindtap='imgclick' data-id='{{b.img}}'>
+                  </image> 
+                </view>
             </view>
         </view>
-    </view>
-</view>
-<view>
-<button bindtap='share' class='sharebutton'>分享</button>
- <!-- <button bindtap='share' class='sharebutton'>点赞</button> -->
- 
- <button bindtap='money' class='coinbutton' disabled = '{{haveclick}}'>点赞</button> 
+    
+      <view class='sharebutton'>
+        <button bindtap='share' >
+          <span class="btn-bg">分享</span>
+        </button>
+        <!-- <button bindtap='money' class='coinbutton' disabled = '{{haveclick}}'>
+          点赞s
+        </button>  -->
+      </view>
+       <!-- <view class='choose-img btn'>
+          <button  plain='true' class='choose-btn' bindtap='upload'>
+            <span class="btn-bg">选择照片</span>
+          </button>
+       </view> -->
+
+
+  <view class='thumb-txt'> 
+    <text class='thumbstyle'>
+      have got {{totalnum}} thumb up
+    </text>
+  </view>
 
 </view>
-
-
-<!-- <view ><image src='{{moneyqr}}'></image></view> -->
-<view> 
-
-<text class='thumbstyle'>have got {{totalnum}} thumb up</text></view>

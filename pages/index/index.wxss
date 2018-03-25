@@ -1,13 +1,31 @@
 .index-container{
   width:100%;
   height:100%;
-  background:#FF9999;
-  padding-left: 20rpx;
-  padding-right:20rpx;
+  /* background:#FF9999; */
+  padding-left: 0rpx;
+  padding-right:0rpx;
+}
+.bg-img{
+  width: 100%;
+  height: 150%;
+  position: fixed;
+  z-index: 0;
+}
+.bg-img image{
+  width: 100%;
+  height: 130%;
+}
+.upper{
+  position: relative;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .index-title{
   height: 10%;
   text-align: center;
+  
   /* margin: 20rpx; */
 }
 .index-title text{
@@ -25,17 +43,17 @@
 
 .exam-img{
   width:90%;
-  height:400rpx;
+  height:300rpx;
   margin: 20rpx auto;
   margin-bottom: 30rpx;
+  
 }
-
 .upload-img{
   width: 300rpx;
   height: 300rpx;
   border:3rpx solid #00ffff;
-  margin: 50rpx  auto;
-  margin-top:80px;
+  margin: 20rpx  auto;
+  margin-top:100px;
   background: #ffff66;
   overflow: hidden;
 }
@@ -47,7 +65,7 @@
   width: 300rpx;
   height: 300rpx;
   border:1px solid #00ffcc;
-  margin:  50rpx  auto;
+  margin:  30rpx  auto;
   position: absolute;
   top:53.5%;
   left: 32%;
@@ -67,7 +85,7 @@
   margin: 0rpx auto;
   color:#00ffcc;
   outline:none;
-  border:1px solid #FF9999;
+  border:none;
 }
 .btn-bg{
   display: block;
@@ -79,6 +97,14 @@
 }
 button[plain] {
   border:none;
+}
+.choose-btn{
+  display: block;
+  width: 100%;
+  border-radius: 30rpx;
+  background-color: #00ffcc;
+  margin:5px;
+  color:#fff;
 }
 
 

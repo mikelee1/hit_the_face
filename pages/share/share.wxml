@@ -1,12 +1,15 @@
 <view>
-    <!-- <canvas style="width:100%;height:{{contentHeight}}px" canvas-id="myCanvas"></canvas> -->
+    
 
-<view  class="mask"></view>
-<view class="canvas-box">
-    <canvas  style="width: {{windowWidth}}px;height: {{windowHeight}}px;" canvas-id="myCanvas"/>
-</view>
+    <view class='bg-img'>
+      <image src='/images/share-bg.jpg' ></image>
+    </view>
+    <image src='/images/background.jpg' id='canvas_bg' style='display:none'></image>
+    <view class="canvas-box">
+        <canvas  style="width: {{windowWidth}}px;height: {{windowHeight}}px;" canvas-id="myCanvas"/>
+    </view>
 
-     <view class="edit-footer">
+    <view class="edit-footer">
         <button class="button-done" type="primary" bindtap="savePic">保存图片</button>
     </view>
 </view>
