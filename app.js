@@ -113,8 +113,8 @@ App({
     userInfo: null,
     baseUrl:'https://www.liyuanye.club',
     inputimg:null,
-    // imgpath: '/images/igglybuff.png',
     imgpath:'',
+    headimgpath:'',
     session_key:null,
     openid:null,
     nickname:null,
@@ -124,7 +124,12 @@ App({
     screenwidth :wx.getSystemInfoSync().windowWidth,
     screenheight:wx.getSystemInfoSync().windowHeight,
     totalnum:0,
-    chooseimagebut:true
+    chooseimagebut:true,
+    prank:true,
+    items: [
+      { name: 'prank', value: 'prank', checked: 'true' },
+      { name: 'normal', value: 'normal' },
+    ]
   }
 })
 

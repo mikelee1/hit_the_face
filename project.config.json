@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.91",
 	"appid": "wxaf249daf125d652c",
-	"projectname": "hit_the_face_zengqiang",
+	"projectname": "hitface",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

@@ -56,7 +56,13 @@
   margin-top:100px;
   background: #ffff66;
   overflow: hidden;
+
 }
+
+.radio{
+text-align: center
+}
+
 .imagestyle{
   width: 100%;
   height: 100%;

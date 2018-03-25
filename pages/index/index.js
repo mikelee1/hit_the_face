@@ -11,34 +11,37 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
         showIf: '',//新增的
-        chooseimagebut:app.globalData.chooseimagebut
+        chooseimagebut:app.globalData.chooseimagebut,
+        array:['prank','normal'],
+        index:0,
+        items: [
+          { name: 'prank', value: 'prank', checked: 'true' },
+          { name: 'normal', value: 'normal'},
+        ],
+        prank:true
   },
-  // autoImage:function(e){
-  //   var imageWidth = e.detail.width,
-  //       imageHeight =e.detail.height,
-  //       Imagescale = imageWidth/imageWidth;
 
-  //   var autoWidth ="",
-  //       autoHeight ="";
+  radioChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value)
+    if (e.detail.value=='normal'){
+      app.globalData.prank=false
+      app.globalData.items =  [
+          { name: 'prank', value: 'prank' },
+          { name: 'normal', value: 'normal', checked: 'true'},
+        ]
+   
+    }else{
+      app.globalData.prank = true
+      app.globalData.items =   [
+          { name: 'prank', value: 'prank', checked: 'true' },
+          { name: 'normal', value: 'normal' },
+        ]
+      
 
-  //   wx.getSystemInfo({
-  //     success: function(res) {
-  //       autoWidth = res.windowWidth,
-  //       autoHeight = autoWidth /Imagescale
-  //     }
-  //   })
+    }
+  },
 
-  //   var image = this.data.auto;
-  //       // image[e.target.dataset.index] ={
-  //       //   width = autoWidth,
-  //       //   height = autoHeight
-  //       // };
-    
-  //   this.setData({
-  //     auto:image
-  //   })
 
-  // },  
   upload() {
     wx.chooseImage({
       count: 1, // 默认9
@@ -54,23 +57,90 @@ Page({
     })
     // this.search()
   },
-  //事件处理函数
-//  changephoto:function(){
-//    var that = this
-//    wx.chooseImage({
-//      count: 1, // 默认9
-//      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-//      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-//      success: function (res) {
-//        var tempFilePaths = res.tempFilePaths
-//        app.globalData.imgpath = tempFilePaths
-//        that.setData({
-//          imgpath: tempFilePaths
-//        })
 
-//      }
-//    })
-//  },
+
+
+
+
+
+
+
+
+
+
+
+  pranksearch: function () {
+
+    this.setData({//新增
+      showIf: 'show'
+    })
+
+    close = false
+    timer = 7
+    var data1 = app.globalData.imgpath;
+    console.log(data1)
+    wx.uploadFile({
+      url: app.globalData.baseUrl + '/prankuploadimg/',
+      filePath: data1,
+      name: 'file',
+      formData: {
+        'userid': app.globalData.openid,
+        'nickname': app.globalData.nickname
+      },
+      success: function (res) {
+        close = true
+        console.log(app.globalData.openid)
+        console.log(res)
+        if (res.data == 'userid is not avaiable') {
+          wx.showToast({
+            title: 'userid is not avaiable',
+          })
+        }
+        var result = JSON.parse(res.data)
+        var resultimg = result.msg
+        var test = result.test
+        var that = this
+        console.log(test)
+        if (resultimg == 'no head') {
+          wx.showToast({
+            title: '照片中无人脸',
+            duration: 4000
+          })
+
+        } else if (resultimg == '') {
+          wx.showToast({
+            title: '未找到匹配照',
+            duration: 4000
+          })
+
+        } else {
+          app.globalData.inputimg = resultimg;
+          app.globalData.totalnum = result.totalnum;
+          wx.navigateTo({
+            url: '../share/share',
+            success: function () {
+              console.log(resultimg)
+            }
+          })
+        }
+      },
+      fail: function (res) {
+        console.log(res.errMsg);
+      },
+    })
+    minus(this)
+  },
+
+
+
+
+
+
+
+
+
+
+
 
 
  search:function(){
@@ -135,16 +205,25 @@ Page({
     minus(this)
  },
  onShow:function(){
-   console.log(app.globalData.imgpath)
+   console.log(app.globalData.chooseimagebut)
    this.setData({
      imgpath:app.globalData.imgpath,
-     chooseimagebut:app.globalData.chooseimagebut
+     chooseimagebut:app.globalData.chooseimagebut,
+     items: app.globalData.items
    })
+   app.globalData.chooseimagebut = false
  },
   onLoad: function (options) {
     var that = this
     if (options.startsearch != null){
-      this.search()
+      // this.search()
+      app.globalData.chooseimagebut=true
+      if (app.globalData.prank){
+        this.pranksearch()
+      }else{
+        this.search()
+      }
+
     }else{
       if (app.globalData.userInfo) {
         this.setData({

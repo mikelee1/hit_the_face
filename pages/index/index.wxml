@@ -18,11 +18,45 @@
       <image src="/images/zhangyishan.jpg"></image>
     </view>
 
-    <view  class='upload-img'>
-      <image  wx:if ="{{showIf==''}}" id='img' src='{{imgpath}}' class='imagestyle' mode='widthFix'></image>
+    <view  >
+    <view class='upload-img'>
+          <image  wx:if ="{{showIf==''}}" id='img' src='{{imgpath}}' class='imagestyle' mode='widthFix'></image>
       <image wx:else src='{{scrollimage}}' class='imagestyle' mode='widthFix'></image>
+ 
     </view>
 
+ 
+
+   <!-- <view class="upload-pricker">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="exam-text">
+              当前选择: 
+          </view>
+
+          <view class='exam-text'>      {{array[index]}}</view>
+    
+      </picker>
+
+
+    </view> -->
+
+
+<view class='radio'>
+<radio-group class="radio-group" bindchange="radioChange">
+    <label class="radio" wx:for="{{items}}">
+        <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+    </label>
+</radio-group>
+
+</view>
+
+
+
+
+
+  
+
+</view>
 
     <view class='choose-img btn'>
       <button   class='choose-btn' bindtap='upload' disabled='{{chooseimagebut}}'>
