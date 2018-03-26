@@ -13,15 +13,13 @@ App({
     // 登录
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
         wx.request({
-          //获取openid接口  
           data: { js_code: res.code},
           url: this.globalData.baseUrl +'/dopgetopenid/',
           method: 'GET',
           success: function (res) {
-            OPEN_ID = res.data;//获取到的openid  
-            console.log(res.data)
+            OPEN_ID = res.data; 
+
             that.globalData.openid = OPEN_ID
           },
           fail:function(e){
@@ -34,17 +32,14 @@ App({
     wx.getSetting({
       
       success: res => {
-        console.log(res)
+
         if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              console.log(res)
-              // 可以将 res 发送给后台解码出 unionId
+
               this.globalData.userInfo = res.userInfo
-              this.globalData.imgpath = res.userInfo.avatarUrl
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
+              this.globalData.avatar = res.userInfo.avatarUrl
+              
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
@@ -60,7 +55,7 @@ App({
             success: function (res) {
               loading(that)
               var userInfo = res.userInfo;
-              that.globalData.imgpath = userInfo.avatarUrl
+              that.globalData.avatar = userInfo.avatarUrl
               getCurrentPages()[0].onShow()
 
             },
@@ -82,13 +77,13 @@ App({
                       success: function (res) {
                         loading(that)
                         var userInfo = res.userInfo;
-                        that.globalData.imgpath = userInfo.avatarUrl
+                        that.globalData.avatar = userInfo.avatarUrl
                         getCurrentPages()[0].onShow()
                       }
                     })
                   }
                 }, fail: function (res) {
-                    console.log(res)
+  
                     console.log('u r forbidden')
                 }
               })
@@ -113,7 +108,7 @@ App({
     userInfo: null,
     baseUrl:'https://www.liyuanye.club',
     inputimg:null,
-    imgpath:'',
+    avatar:'',
     headimgpath:'',
     session_key:null,
     openid:null,
@@ -129,7 +124,8 @@ App({
     items: [
       { name: 'prank', value: 'prank', checked: 'true' },
       { name: 'normal', value: 'normal' },
-    ]
+    ],
+    avatarcache:''
   }
 })
 
@@ -142,7 +138,7 @@ function loading(that){
       })
       // wx.hideToast()
       that.globalData.chooseimagebut=false
-      getCurrentPages()[0].onShow()
+      getCurrentPages()[0].onShow()    //////////////////////Cannot read property 'onShow' of undefined;
         
     } else {
 

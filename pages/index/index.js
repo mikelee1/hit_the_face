@@ -1,17 +1,15 @@
-//index.js
-//获取应用实例
 const app = getApp()
-var timer = 15
+var timer = 49
 var close = false
 Page({
   data: {
-    imgpath: app.globalData.imgpath,
+    avatar: app.globalData.avatar,
     headimgpath: app.globalData.headimgpath,
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        showIf: '',//新增的
+        showIf: '',
         chooseimagebut:app.globalData.chooseimagebut,
         array:['prank','normal'],
         index:0,
@@ -45,39 +43,28 @@ Page({
 
   upload() {
     wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      count: 1, 
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'], 
       success(res) {
         const src = res.tempFilePaths[0]
-
         wx.redirectTo({
           url: `../upload/upload?src=${src}`
         })
       }
     })
-    // this.search()
   },
 
 
 
 
-
-
-
-
-
-
-
-
   pranksearch: function () {
-
-    this.setData({//新增
+    this.setData({
       showIf: 'show'
     })
-
+  var that = this
     close = false
-    timer = 7
+    timer = 49
     var data1 = app.globalData.headimgpath;
 
     wx.uploadFile({
@@ -89,6 +76,7 @@ Page({
         'nickname': app.globalData.nickname
       },
       success: function (res) {
+        that.setData({ chooseimagebut: false })
         close = true
         console.log(app.globalData.openid)
         console.log(res)
@@ -100,7 +88,7 @@ Page({
         var result = JSON.parse(res.data)
         var resultimg = result.msg
         var test = result.test
-        var that = this
+
         console.log(test)
         if (resultimg == 'no head') {
           wx.showToast({
@@ -134,26 +122,15 @@ Page({
 
 
 
-
-
-
-
-
-
-
-
-
-
  search:function(){
-
-   this.setData({//新增
+   this.setData({
      showIf: 'show'
    })
-
+   var that = this
    close = false
-    timer = 7
+    timer = 49
     var data1 = app.globalData.headimgpath;
-   console.log(data1)
+
     wx.uploadFile({
       url: app.globalData.baseUrl + '/dopuploadimg/',
       filePath: data1,
@@ -163,6 +140,7 @@ Page({
         'nickname':app.globalData.nickname
       },
       success:function(res){
+ 
         close = true
         console.log(app.globalData.openid)
         console.log(res)
@@ -170,24 +148,24 @@ Page({
           wx.showToast({
             title: 'userid is not avaiable',
           })
+          that.setData({ chooseimagebut: false })
         }
         var result = JSON.parse(res.data)
         var resultimg = result.msg
         var test = result.test
-        var that = this
+        that.setData({ chooseimagebut: false })
         console.log(test)
         if (resultimg == 'no head'){
           wx.showToast({
             title: '照片中无人脸',
             duration: 4000
           })
-
+ 
         }else if (resultimg == ''){
           wx.showToast({
             title: '未找到匹配照',
             duration: 4000
           })
-
         }else{
           app.globalData.inputimg = resultimg;
           app.globalData.totalnum = result.totalnum;
@@ -205,20 +183,22 @@ Page({
     })
     minus(this)
  },
- onShow:function(){
-   console.log(app.globalData.chooseimagebut)
-   this.setData({
-     headimgpath: app.globalData.headimgpath,
-     chooseimagebut:app.globalData.chooseimagebut,
-     items: app.globalData.items
-   })
-   app.globalData.chooseimagebut = false
- },
+
+
+  onShow:function(){
+    this.setData({
+      headimgpath: app.globalData.headimgpath,
+      items: app.globalData.items
+    })
+    app.globalData.chooseimagebut = false
+  },
+
+
   onLoad: function (options) {
+    console.log(options)
     var that = this
     if (options.startsearch != null){
-      // this.search()
-      app.globalData.chooseimagebut=true
+      that.setData({chooseimagebut:true})
       if (app.globalData.prank){
         this.pranksearch()
       }else{
@@ -226,6 +206,11 @@ Page({
       }
 
     }else{
+
+
+
+
+      this.setData({ chooseimagebut: false })
       if (app.globalData.userInfo) {
         this.setData({
           headimgpath: app.globalData.headimgpath,
@@ -234,19 +219,28 @@ Page({
           openid: app.globalData.openid
         })
       } else if (this.data.canIUse) {
-        // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-        // 所以此处加入 callback 以防止这种情况
         console.log('111')
         app.userInfoReadyCallback = res => {
           console.log(res);
           console.log('chose')
           app.globalData.nickname = res.userInfo.nickName;
           this.setData({
-            imgpath: res.userInfo.avatarUrl,
+            avatar: res.userInfo.avatarUrl,
             userInfo: res.userInfo,
             hasUserInfo: true,
             openid: app.globalData.openid
           })
+
+          wx.getImageInfo({
+            src: that.data.avatar,
+            success: function (res) {
+              console.log(res)
+              console.log(res.path)
+              app.globalData.avatarcache = res.path
+            }
+          })
+
+
         }
       } else {
         // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -256,13 +250,23 @@ Page({
             success: res => {
               console.log(res)
               that.setData({
-                imgpath:res.userInfo.avatarUrl
+                avatar:res.userInfo.avatarUrl
               })
               app.globalData.userInfo = res.userInfo
               this.setData({
                 userInfo: res.userInfo,
                 hasUserInfo: true
               })
+
+              wx.getImageInfo({
+                src: that.data.avatar,
+                success: function (res) {
+                  console.log(res)
+                  console.log(res.path)
+                  app.globalData.avatarcache = res.path
+                }
+              })
+
             }
           })
       }
@@ -274,7 +278,7 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true,
-      imgpath:null,
+      avatar:null,
     }) 
   }
 })
@@ -290,13 +294,13 @@ function minus(that) {
       app.globalData.scrollimage = '/images/' + timer + '.jpg',
       timer = timer - 1;
       if (timer < 1){
-        timer = 7
+        timer = 49
       }
     setTimeout(function () {
       that.setData({
         scrollimage: app.globalData.scrollimage
       })
       minus(that)
-    }, 100)
+    }, 20)
   }
 }

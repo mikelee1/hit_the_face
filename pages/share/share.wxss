@@ -13,10 +13,25 @@
   position: relative;
   z-index: 100;
 }
-.edit-footer{
+.edit-footerleft{
+    border: 1px solid greenyellow;
+  border-radius: 10rpx;
+  display: flex;
+  float: left;
+  margin-left: 20%
+}
+.edit-footerright{
+    border: 1px solid greenyellow;
+  border-radius: 10rpx;
+  display: flex;
+  float: right;
+  margin-right: 20%
+}
+
+/* .edit-footer{
   margin:0 auto;
   margin-top: 20rpx;
   width: 70%;
   border: 1px solid greenyellow;
   border-radius: 30rpx;
-}
+} */

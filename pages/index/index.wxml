@@ -20,26 +20,10 @@
 
     <view  >
     <view class='upload-img'>
-          <image  wx:if ="{{showIf==''}}" id='img' src='{{imgpath}}' class='imagestyle' mode='widthFix'></image>
+          <image  wx:if ="{{showIf==''}}" id='img' src='{{avatar}}' class='imagestyle' mode='widthFix'></image>
       <image wx:else src='{{scrollimage}}' class='imagestyle' mode='widthFix'></image>
  
     </view>
-
- 
-
-   <!-- <view class="upload-pricker">
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-          <view class="exam-text">
-              当前选择: 
-          </view>
-
-          <view class='exam-text'>      {{array[index]}}</view>
-    
-      </picker>
-
-
-    </view> -->
-
 
 <view class='radio'>
 <radio-group class="radio-group" bindchange="radioChange">
@@ -51,11 +35,6 @@
 </view>
 
 
-
-
-
-  
-
 </view>
 
     <view class='choose-img btn'>
@@ -64,10 +43,6 @@
         选择照片
       </button>
     </view>
-  
-    <!-- <view class='search-img btn'> 
-      <button  plain='true' class='search-btn' bindtap='search'><span class="btn-bg">搜 索</span></button> 
-    </view> -->
 
   </view>
 </view>

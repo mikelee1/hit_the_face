@@ -20,7 +20,7 @@ Page({
     if (app.globalData.inputimg){
       this.setData({
         totalnum:app.globalData.totalnum,
-        imgpath:app.globalData.imgpath,
+        avatar: app.globalData.avatar,
         inputimg: app.globalData.inputimg,
         moneyqr: app.globalData.moneyqr
       })
@@ -72,6 +72,10 @@ Page({
   onReachBottom: function () {
   
   },
+
+
+
+
 
 
   money:function(){
