@@ -98,6 +98,17 @@ Page({
             duration: 4000
           })
 
+          // app.globalData.inputimg = result.nickyoung;
+          // app.globalData.rate = result.rate
+          // app.globalData.humword = result.humword
+          // wx.navigateTo({
+          //   url: '../share/share',
+          //   success: function () {
+
+          //   }
+          // })
+
+
         } else {
           app.globalData.inputimg = resultimg;
           app.globalData.totalnum = result.totalnum;
@@ -148,6 +159,7 @@ Page({
         }
         var result = JSON.parse(res.data)
         var resultimg = result.msg
+        var signal = result.signal
         var test = result.test
         that.setData({ chooseimagebut: false })
         if (resultimg == 'no head'){
@@ -155,12 +167,25 @@ Page({
             title: '照片中无人脸',
             duration: 4000
           })
- 
-        }else if (resultimg == ''){
+
+        }else if (signal == 'false'){
           wx.showToast({
             title: '未找到匹配照',
             duration: 4000
           })
+          app.globalData.inputimg = resultimg;
+          app.globalData.rate = result.msg[0].rate;
+          app.globalData.humword = result.msg[0].humword
+          wx.navigateTo({
+            url: '../share/share',
+            success: function () {
+
+            }
+          })
+
+
+
+
         }else{
           app.globalData.inputimg = resultimg;
           app.globalData.totalnum = result.totalnum;

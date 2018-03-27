@@ -95,6 +95,11 @@ Page({
 
   onShow: function () {
 
+    wx.showLoading({
+      title: '耐心等待几秒钟,答案马上揭晓...',
+    })
+
+
     wx.downloadFile({
       url: app.globalData.baseUrl + '/static/avatar/'+app.globalData.openid+'.jpg',
       success: function (res) {
@@ -146,6 +151,7 @@ Page({
     ctx.setFillStyle('black');
     ctx.fillText('长按扫码查看和你最像的人', 40, 0.8 * height)
     ctx.draw()
+    wx.hideLoading()
         }
       })
 
