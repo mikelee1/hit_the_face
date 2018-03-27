@@ -7,11 +7,13 @@
         <canvas  style="width: {{windowWidth}}px;height: {{windowHeight}}px;" canvas-id="myCanvas"/>
     </view>
 
-    <view >
+    <view style='margin-top:20rpx' >
         <button class="edit-footerleft" type="primary" bindtap="savePic">保存图片</button>
-         <button class="edit-footerright" type="primary" bindtap='donate'>donate</button> 
+         <button class="edit-footerright" type="primary" bindtap='donate'>支持一哈</button> 
     </view>
 </view>
+
+
 
 
 

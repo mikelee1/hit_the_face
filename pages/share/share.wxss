@@ -18,14 +18,14 @@
   border-radius: 10rpx;
   display: flex;
   float: left;
-  margin-left: 20%
+  margin-left: 15%
 }
 .edit-footerright{
     border: 1px solid greenyellow;
   border-radius: 10rpx;
   display: flex;
   float: right;
-  margin-right: 20%
+  margin-right: 15%
 }
 
 /* .edit-footer{

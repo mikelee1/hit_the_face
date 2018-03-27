@@ -7,16 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    totalnum: app.globalData.totalnum
+    totalnum: app.globalData.totalnum,
+    haveclick: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-
-
     if (app.globalData.inputimg){
       this.setData({
         totalnum:app.globalData.totalnum,
@@ -25,7 +23,7 @@ Page({
         moneyqr: app.globalData.moneyqr
       })
     }else{
-      console.log('no images return')
+
     }
   },
 
@@ -82,7 +80,7 @@ Page({
     this.setData({
       haveclick:true
     })
-    console.log(this.data.totalnum)
+
     this.setData({
       totalnum:this.data.totalnum+1
     })
@@ -96,20 +94,19 @@ Page({
       },  
       method:'post',
       success:function(){
-        console.log('success update thumb')
+    
       }
       
     })
 
-    console.log(this.data.totalnum)
+
   },
 
   imgclick: function (event) {
-    console.log(event)
+
     var imgm = event.currentTarget.dataset.id;
     wx.previewImage({
       urls: imgm.split(','),
-      // 需要预览的图片http链接  使用split把字符串转数组。不然会报错  
     })
   },
 
@@ -139,9 +136,7 @@ Page({
 
   },
 
-  data:{
-    haveclick:false
-  }
+
 
 
 })

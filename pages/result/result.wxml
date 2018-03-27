@@ -30,11 +30,6 @@
           点赞s
         </button>  -->
       </view>
-       <!-- <view class='choose-img btn'>
-          <button  plain='true' class='choose-btn' bindtap='upload'>
-            <span class="btn-bg">选择照片</span>
-          </button>
-       </view> -->
 
 
   <view class='thumb-txt'> 

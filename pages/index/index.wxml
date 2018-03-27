@@ -19,30 +19,24 @@
     </view>
 
     <view  >
-    <view class='upload-img'>
+      <view class='upload-img'>
           <image  wx:if ="{{showIf==''}}" id='img' src='{{avatar}}' class='imagestyle' mode='widthFix'></image>
       <image wx:else src='{{scrollimage}}' class='imagestyle' mode='widthFix'></image>
- 
     </view>
 
-<view class='radio'>
-<radio-group class="radio-group" bindchange="radioChange">
-    <label class="radio" wx:for="{{items}}">
-        <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-    </label>
-</radio-group>
-
-</view>
-
-
+  <view class='radio'>
+  <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio" wx:for="{{items}}">
+          <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+      </label>
+  </radio-group>
+  </view>
 </view>
 
     <view class='choose-img btn'>
       <button   class='choose-btn' bindtap='upload' disabled='{{chooseimagebut}}'>
-        <!-- <span class="btn-bg"></span> -->
         选择照片
       </button>
     </view>
-
   </view>
 </view>

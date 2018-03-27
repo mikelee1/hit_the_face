@@ -14,26 +14,25 @@ Page({
         array:['prank','normal'],
         index:0,
         items: [
-          { name: 'prank', value: 'prank', checked: 'true' },
-          { name: 'normal', value: 'normal'},
+          { name: 'prank', value: '整蛊版', checked: 'true' },
+          { name: 'normal', value: '正常版'},
         ],
         prank:true
   },
 
   radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
     if (e.detail.value=='normal'){
       app.globalData.prank=false
       app.globalData.items =  [
-          { name: 'prank', value: 'prank' },
-          { name: 'normal', value: 'normal', checked: 'true'},
+        { name: 'prank', value: '整蛊版' },
+        { name: 'normal', value: '正常版', checked: 'true'},
         ]
    
     }else{
       app.globalData.prank = true
       app.globalData.items =   [
-          { name: 'prank', value: 'prank', checked: 'true' },
-          { name: 'normal', value: 'normal' },
+        { name: 'prank', value: '整蛊版', checked: 'true' },
+        { name: 'normal', value: '正常版' },
         ]
       
 
@@ -73,13 +72,12 @@ Page({
       name: 'file',
       formData: {
         'userid': app.globalData.openid,
-        'nickname': app.globalData.nickname
+        'nickname': app.globalData.nickname,
+        'avatar':app.globalData.avatar
       },
       success: function (res) {
         that.setData({ chooseimagebut: false })
         close = true
-        console.log(app.globalData.openid)
-        console.log(res)
         if (res.data == 'userid is not avaiable') {
           wx.showToast({
             title: 'userid is not avaiable',
@@ -88,8 +86,6 @@ Page({
         var result = JSON.parse(res.data)
         var resultimg = result.msg
         var test = result.test
-
-        console.log(test)
         if (resultimg == 'no head') {
           wx.showToast({
             title: '照片中无人脸',
@@ -105,16 +101,17 @@ Page({
         } else {
           app.globalData.inputimg = resultimg;
           app.globalData.totalnum = result.totalnum;
+          app.globalData.rate = result.msg[0].rate
+          app.globalData.humword = result.msg[0].humword
           wx.navigateTo({
             url: '../share/share',
             success: function () {
-              console.log(resultimg)
+
             }
           })
         }
       },
       fail: function (res) {
-        console.log(res.errMsg);
       },
     })
     minus(this)
@@ -137,13 +134,12 @@ Page({
       name: 'file',
       formData: {
         'userid': app.globalData.openid,
-        'nickname':app.globalData.nickname
+        'nickname':app.globalData.nickname,
+        'avatar': app.globalData.avatar
       },
       success:function(res){
  
         close = true
-        console.log(app.globalData.openid)
-        console.log(res)
         if (res.data =='userid is not avaiable'){
           wx.showToast({
             title: 'userid is not avaiable',
@@ -154,7 +150,6 @@ Page({
         var resultimg = result.msg
         var test = result.test
         that.setData({ chooseimagebut: false })
-        console.log(test)
         if (resultimg == 'no head'){
           wx.showToast({
             title: '照片中无人脸',
@@ -169,16 +164,16 @@ Page({
         }else{
           app.globalData.inputimg = resultimg;
           app.globalData.totalnum = result.totalnum;
+          app.globalData.rate = result.msg[0].rate;
+          app.globalData.humword = result.msg[0].humword
           wx.navigateTo({
             url: '../share/share',
             success: function () {
-              console.log(resultimg)
             }
           })
         }
       },
       fail:function(res){
-        console.log(res.errMsg);
       },
     })
     minus(this)
@@ -195,7 +190,6 @@ Page({
 
 
   onLoad: function (options) {
-    console.log(options)
     var that = this
     if (options.startsearch != null){
       that.setData({chooseimagebut:true})
@@ -219,10 +213,8 @@ Page({
           openid: app.globalData.openid
         })
       } else if (this.data.canIUse) {
-        console.log('111')
+
         app.userInfoReadyCallback = res => {
-          console.log(res);
-          console.log('chose')
           app.globalData.nickname = res.userInfo.nickName;
           this.setData({
             avatar: res.userInfo.avatarUrl,
@@ -231,24 +223,13 @@ Page({
             openid: app.globalData.openid
           })
 
-          wx.getImageInfo({
-            src: that.data.avatar,
-            success: function (res) {
-              console.log(res)
-              console.log(res.path)
-              app.globalData.avatarcache = res.path
-            }
-          })
-
-
         }
       } else {
         // 在没有 open-type=getUserInfo 版本的兼容处理
-        console.log('222')
+
         this.data.headimgpath = app.globalData.headimgpath,
           wx.getUserInfo({
             success: res => {
-              console.log(res)
               that.setData({
                 avatar:res.userInfo.avatarUrl
               })
@@ -258,22 +239,12 @@ Page({
                 hasUserInfo: true
               })
 
-              wx.getImageInfo({
-                src: that.data.avatar,
-                success: function (res) {
-                  console.log(res)
-                  console.log(res.path)
-                  app.globalData.avatarcache = res.path
-                }
-              })
-
             }
           })
       }
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
