@@ -18,6 +18,7 @@ App({
     prank: true,
     rate:0,
     humword:'',
+    sharepagedoor:false,
     items: [
       { name: 'prank', value: '整蛊版', checked: 'true' },
       { name: 'normal', value: '正常版' },

@@ -190,3 +190,7 @@ button[plain] {
  }
 
  **/
+
+ .forward{
+   float: right;
+ }

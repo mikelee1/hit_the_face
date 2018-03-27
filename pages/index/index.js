@@ -17,7 +17,8 @@ Page({
           { name: 'prank', value: '整蛊版', checked: 'true' },
           { name: 'normal', value: '正常版'},
         ],
-        prank:true
+        prank:true,
+        sharepagedoor:app.globalData.sharepagedoor
   },
 
   radioChange: function (e) {
@@ -38,6 +39,13 @@ Page({
 
     }
   },
+
+
+tosharepage:function(){
+  wx.navigateTo({
+    url: '../share/share',
+  })
+},
 
 
   upload() {
@@ -207,6 +215,7 @@ Page({
 
   onShow:function(){
     this.setData({
+      sharepagedoor: app.globalData.sharepagedoor,
       headimgpath: app.globalData.headimgpath,
       items: app.globalData.items
     })

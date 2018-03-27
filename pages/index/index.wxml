@@ -8,6 +8,7 @@
   <view class='upper'>
     <view class="index-title">
       <text> 茫茫人海，谁与你长的最像？</text>
+            <image class='forward' bindtap='tosharepage'  wx:if='{{sharepagedoor}}' src='/images/forward.png' style='width:50px;height:50px' ></image>
     </view>
 
     <view class='exam-text'>
@@ -21,8 +22,12 @@
     <view  >
       <view class='upload-img'>
           <image  wx:if ="{{showIf==''}}" id='img' src='{{avatar}}' class='imagestyle' mode='widthFix'></image>
-      <image wx:else src='{{scrollimage}}' class='imagestyle' mode='widthFix'></image>
+          <image wx:else src='{{scrollimage}}' class='imagestyle' mode='widthFix'></image>
+
+
+
     </view>
+          
 
   <view class='radio'>
   <radio-group class="radio-group" bindchange="radioChange">
@@ -37,6 +42,9 @@
       <button   class='choose-btn' bindtap='upload' disabled='{{chooseimagebut}}'>
         选择照片
       </button>
+
+
+
     </view>
   </view>
 </view>

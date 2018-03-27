@@ -28,6 +28,7 @@ Page({
   },
   onLoad: function (options) {
     var that = this;
+    app.globalData.sharepagedoor = true
   },
 
 //   onShow: function () {
