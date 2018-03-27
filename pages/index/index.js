@@ -42,8 +42,9 @@ Page({
 
 
 tosharepage:function(){
+
   wx.navigateTo({
-    url: '../share/share',
+    url: '../share/share?cachedoor=true',
   })
 },
 
