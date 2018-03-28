@@ -11,9 +11,10 @@
 }
 .canvas-box{
   position: relative;
-  z-index: 100;
+  z-index: -1;
+  
 }
-.edit-footerleft{
+/* .edit-footerleft{
     border: 1px solid greenyellow;
   border-radius: 10rpx;
   display: flex;
@@ -26,6 +27,20 @@
   display: flex;
   float: right;
   margin-right: 15%
+} */
+.btn{
+  width: 100%;
+  height: 10%;
+position: fixed;
+display: flex;
+float:right;
+flex-direction: row;
+justify-content: center;
+/* align-content: center; */
+   bottom:5rpx; 
+  /* z-index: 100; */
+  /* margin: auto; */
+   /* background:#0099CC;color:#ffffcc;  */
 }
 
 /* .edit-footer{

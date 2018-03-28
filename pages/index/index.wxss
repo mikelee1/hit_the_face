@@ -1,19 +1,18 @@
 .index-container{
   width:100%;
   height:100%;
-  /* background:#FF9999; */
   padding-left: 0rpx;
   padding-right:0rpx;
 }
 .bg-img{
   width: 100%;
-  height: 150%;
+  height: 100%;
   position: fixed;
   z-index: 0;
 }
 .bg-img image{
   width: 100%;
-  height: 130%;
+  height: 100%;
 }
 .upper{
   position: relative;
@@ -43,31 +42,26 @@
 
 .exam-img{
   width:100%;
-  height:300rpx;
+  height:40%;
 text-align: center;
-  margin-bottom: 30rpx;
+  margin-bottom: 5rpx;
 }
-
-
-/* .exam-img{
-  width:90%;
-  height:300rpx;
-  margin: 20rpx auto;
-  margin-bottom: 30rpx;
-} */
 .upload-img{
   width: 300rpx;
   height: 300rpx;
   border:3rpx solid #00ffff;
-  margin: 20rpx  auto;
-  margin-top:100px;
+  margin: 5rpx  auto;
+  margin-top:2%;
   background: #ffff66;
   overflow: hidden;
 
 }
 
 .radio{
-text-align: center
+text-align: center;
+display: flex;
+flex-direction: row;
+margin: auto
 }
 
 .imagestyle{
@@ -121,76 +115,8 @@ button[plain] {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**index.wxss
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
-}
-
-.imagestyle{
-  align-items: center;
-}
-
-.buttonstyle{
-  align-items: center;
-}
-
-.placeholder{
-    margin: 5px;
-    padding: 0 10px;
-    text-align: center;
-    background-color: #EBEBEB;
-    height: 2.3em;
-    line-height: 2.3em;
-    color: #cfcfcf;
-}
-
- .main-left{
-     width:100%;
-
-        align-items: center;
-      float:left;  
- }
- .main-right{
-     width:100%;
-       height:100%;
-
-     float:right; 
-     
- }
-
- **/
-
  .forward{
+
    float: right;
+   z-index: 100;
  }

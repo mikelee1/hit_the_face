@@ -19,6 +19,7 @@ Page({
         ],
         prank:true,
         sharepagedoor:app.globalData.sharepagedoor
+
   },
 
   radioChange: function (e) {

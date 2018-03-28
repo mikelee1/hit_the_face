@@ -1,19 +1,15 @@
 <view>
-    <view class='bg-img'>
+    <!-- <view class='bg-img'>
       <image src='/images/share-bg.jpg' ></image>
-    </view>
-    <image src='/images/background.jpg' id='canvas_bg' style='display:none'></image>
+    </view> -->
+    <!-- <image src='/images/background.jpg' id='canvas_bg' style='display:none'></image> -->
     <view class="canvas-box">
-        <canvas  style="width: {{windowWidth}}px;height: {{windowHeight}}px;" canvas-id="myCanvas"/>
-    </view>
+        <canvas  style="width: {{windowWidth}}px;height: {{windowHeight}}px;z-index:-1;position:absolute" canvas-id="myCanvas"/>
 
-    <view style='margin-top:20rpx' >
-        <button class="edit-footerleft" type="primary" bindtap="savePic">保存图片</button>
-         <button class="edit-footerright" type="primary" bindtap='donate'>支持一哈</button> 
+     </view>
+
+    <view class='btn' > 
+        <button style='margin:auto;'  bindtap="savePic">保存图片</button>
+         <button style='margin:auto;'  bindtap='donate'>支持一哈</button> 
     </view>
 </view>
-
-
-
-
-
