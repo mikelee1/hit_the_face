@@ -166,24 +166,16 @@ var avatarimgcache;
             const ctx = wx.createCanvasContext('myCanvas');
             var leftimg = app.globalData.headimgpath;
             var rightimg = res.tempFilePath;
-            // var leftimg = '../../images/1.jpg'
-            // var rightimg = '../../images/3.jpg'
-
             var avatar = avatarimg;
-            // var avatar = '../../images/2.jpg';
-
             var qrPath = '../../images/qrcode2.jpg'
             var bgImga = '../../images/share222.jpg'
             var similarpic = '../../images/similar.jpg'
             var picsize = 0.4
             var nickname = app.globalData.nickname
-            // var nickname = 'xxxxxx'
             var rate = app.globalData.rate
-            // var rate = '99%'
             var humword = app.globalData.humword
-            // var humword = '哈哈,翻出了你的旧照'
 
-            ctx.drawImage(bgImga,0, 0,  width, height); //背景
+            ctx.drawImage(bgImga,0, 0,  width, height); 
             ctx.drawImage(similarpic, 0.13 * width, 0.25 * width, 0.5 * width, 0.11 * width)
             ctx.font = "45px Arial";
             ctx.setFillStyle('red')
@@ -194,7 +186,7 @@ var avatarimgcache;
             ctx.drawImage(rightimg, 0.53 * width, 0.25 * height, picsize * width, picsize * width);
 
             ctx.drawImage(avatar, 30, 0.3 * height + picsize * width, 60, 60);
-            ctx.drawImage(qrPath, 0.75 * width, 0.9 * height - 0.25 * width, 0.25 * width, 0.25 * width);//////////////////////////////
+            ctx.drawImage(qrPath, 0.75 * width, 0.9 * height - 0.25 * width, 0.25 * width, 0.25 * width);
 
             ctx.font = "18rpx Arial";
             ctx.setFillStyle('#8B4789')
@@ -205,15 +197,8 @@ var avatarimgcache;
             ctx.fillText('长按扫码查看和你最像的人', 40, 0.88 * height)/////////////////////////////
             ctx.draw()
             wx.hideLoading()
-            // wx.setStorageSync({
-            //   key: "ctx",
-            //   data: ctx
-            // })
             wx.setStorageSync("rightimg", rightimg)
-
             wx.setStorageSync("avatarimg",avatarimg)
-
-  
           }
         })
 
@@ -234,6 +219,9 @@ var avatarimgcache;
     var imgmo = app.globalData.baseUrl + '/static/moneyqr.jpg';
     wx.previewImage({
       urls: imgmo.split(','),
+    })
+    wx.redirectTo({
+      url: '../share/share?cachedoor=true',
     })
   },
 
