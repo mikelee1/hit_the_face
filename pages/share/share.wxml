@@ -1,7 +1,8 @@
 <view>
-    <!-- <view class='bg-img'>
-      <image src='/images/share-bg.jpg' ></image>
-    </view> -->
+     <view class='bg-img'>
+       <image src='/images/share-bg.png' ></image> 
+
+    </view> 
      <!-- <image src='/images/background.jpg' ></image>  -->
     <view class="canvas-box">
         <canvas  style="width: {{windowWidth}}px;height: {{windowHeight}}px;z-index:-1;position:absolute" canvas-id="myCanvas"/>
@@ -10,6 +11,6 @@
 
     <view class='btn' > 
         <button style='margin:auto;'  bindtap="savePic">分享一下</button>
-         <button style='margin:auto;'  bindtap='donate'>支持一哈</button> 
+         <button style='margin:auto;'  bindtap='donate'>支持一下</button> 
     </view>
 </view>

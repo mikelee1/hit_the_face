@@ -1,5 +1,5 @@
 const app = getApp()
-var timer = 49
+var timer = 48
 var close = false
 Page({
   data: {
@@ -9,52 +9,52 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        showIf: '',
-        chooseimagebut:app.globalData.chooseimagebut,
-        array:['prank','normal'],
-        index:0,
-        items: [
-          { name: 'prank', value: '整蛊版', checked: 'true' },
-          { name: 'normal', value: '正常版'},
-        ],
-        prank:true,
-        sharepagedoor:app.globalData.sharepagedoor
+    showIf: '',
+    chooseimagebut: app.globalData.chooseimagebut,
+    array: ['prank', 'normal'],
+    index: 0,
+    items: [
+      { name: 'prank', value: '整蛊版', checked: 'true' },
+      { name: 'normal', value: '正常版' },
+    ],
+    prank: true,
+    sharepagedoor: app.globalData.sharepagedoor
 
   },
 
   radioChange: function (e) {
-    if (e.detail.value=='normal'){
-      app.globalData.prank=false
-      app.globalData.items =  [
+    if (e.detail.value == 'normal') {
+      app.globalData.prank = false
+      app.globalData.items = [
         { name: 'prank', value: '整蛊版' },
-        { name: 'normal', value: '正常版', checked: 'true'},
-        ]
-   
-    }else{
+        { name: 'normal', value: '正常版', checked: 'true' },
+      ]
+
+    } else {
       app.globalData.prank = true
-      app.globalData.items =   [
+      app.globalData.items = [
         { name: 'prank', value: '整蛊版', checked: 'true' },
         { name: 'normal', value: '正常版' },
-        ]
-      
+      ]
+
 
     }
   },
 
 
-tosharepage:function(){
+  tosharepage: function () {
 
-  wx.navigateTo({
-    url: '../share/share?cachedoor=true',
-  })
-},
+    wx.navigateTo({
+      url: '../share/share?cachedoor=true',
+    })
+  },
 
 
   upload() {
     wx.chooseImage({
-      count: 1, 
+      count: 1,
       sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'], 
+      sourceType: ['album', 'camera'],
       success(res) {
         const src = res.tempFilePaths[0]
         wx.redirectTo({
@@ -71,9 +71,9 @@ tosharepage:function(){
     this.setData({
       showIf: 'show'
     })
-  var that = this
+    var that = this
     close = false
-    timer = 49
+    timer = 48
     var data1 = app.globalData.headimgpath;
 
     wx.uploadFile({
@@ -83,10 +83,10 @@ tosharepage:function(){
       formData: {
         'userid': app.globalData.openid,
         'nickname': app.globalData.nickname,
-        'avatar':app.globalData.avatar
+        'avatar': app.globalData.avatar
       },
       success: function (res) {
-        that.setData({ chooseimagebut: false })
+
         close = true
         if (res.data == 'userid is not avaiable') {
           wx.showToast({
@@ -108,16 +108,6 @@ tosharepage:function(){
             duration: 4000
           })
 
-          // app.globalData.inputimg = result.nickyoung;
-          // app.globalData.rate = result.rate
-          // app.globalData.humword = result.humword
-          // wx.navigateTo({
-          //   url: '../share/share',
-          //   success: function () {
-
-          //   }
-          // })
-
 
         } else {
           app.globalData.inputimg = resultimg;
@@ -131,22 +121,26 @@ tosharepage:function(){
             }
           })
         }
+        that.setData({ chooseimagebut: false })
       },
       fail: function (res) {
       },
     })
+    wx.showToast({
+      title: '玩命匹配中~',
+    }, 6000)
     minus(this)
   },
 
 
 
- search:function(){
-   this.setData({
-     showIf: 'show'
-   })
-   var that = this
-   close = false
-    timer = 49
+  search: function () {
+    this.setData({
+      showIf: 'show'
+    })
+    var that = this
+    close = false
+    timer = 48
     var data1 = app.globalData.headimgpath;
 
     wx.uploadFile({
@@ -155,11 +149,11 @@ tosharepage:function(){
       name: 'file',
       formData: {
         'userid': app.globalData.openid,
-        'nickname':app.globalData.nickname,
+        'nickname': app.globalData.nickname,
         'avatar': app.globalData.avatar
       },
-      success:function(res){
- 
+      success: function (res) {
+
         close = true
 
         var result = JSON.parse(res.data)
@@ -168,15 +162,15 @@ tosharepage:function(){
         var test = result.test
         if (result.msg == '400') {
           wx.showToast({
-            title: '服务器正在升级中,请稍后体验...',
+            title: '服务器升级中...',
           })
           that.setData({ chooseimagebut: false })
         }
 
 
-        else{
+        else {
 
-          that.setData({ chooseimagebut: false })
+
           if (resultimg == 'no head') {
             wx.showToast({
               title: '照片中无人脸',
@@ -212,19 +206,22 @@ tosharepage:function(){
               }
             })
           }
-
+          that.setData({ chooseimagebut: false })
 
         }
 
       },
-      fail:function(res){
+      fail: function (res) {
       },
     })
+    wx.showToast({
+      title: '玩命匹配中~',
+    },6000)
     minus(this)
- },
+  },
 
 
-  onShow:function(){
+  onShow: function () {
     this.setData({
       sharepagedoor: app.globalData.sharepagedoor,
       headimgpath: app.globalData.headimgpath,
@@ -236,10 +233,6 @@ tosharepage:function(){
 
   onLoad: function (options) {
     var that = this
-
-
-
-
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -310,20 +303,20 @@ tosharepage:function(){
 
 
 
-    if (options.startsearch != null){
-      that.setData({chooseimagebut:true})
-      if (app.globalData.prank){
+    if (options.startsearch != null) {
+      that.setData({ chooseimagebut: true })
+      if (app.globalData.prank) {
         this.pranksearch()
-      }else{
+      } else {
         this.search()
       }
 
-    }else{
+    } else {
 
-          loading(that)
+      loading(that)
 
 
-      this.setData({ chooseimagebut: false })
+
       if (app.globalData.userInfo) {
         this.setData({
           headimgpath: app.globalData.headimgpath,
@@ -350,7 +343,7 @@ tosharepage:function(){
           wx.getUserInfo({
             success: res => {
               that.setData({
-                avatar:res.userInfo.avatarUrl
+                avatar: res.userInfo.avatarUrl
               })
               app.globalData.userInfo = res.userInfo
               this.setData({
@@ -361,15 +354,16 @@ tosharepage:function(){
             }
           })
       }
+      this.setData({ chooseimagebut: false })
     }
   },
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true,
-      avatar:null,
-    }) 
+      avatar: null,
+    })
   }
 })
 
@@ -381,11 +375,11 @@ function minus(that) {
         scrollimage: app.globalData.scrollimage
       })
   } else {
-      app.globalData.scrollimage = '/images/' + timer + '.jpg',
+    app.globalData.scrollimage = '/images/' + timer + '.jpg',
       timer = timer - 1;
-      if (timer < 1){
-        timer = 49
-      }
+    if (timer < 1) {
+      timer = 48
+    }
     setTimeout(function () {
       that.setData({
         scrollimage: app.globalData.scrollimage
