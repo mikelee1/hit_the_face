@@ -1,0 +1,27 @@
+<view style='height:100%'>
+  <view class='userinfo'>
+    <open-data class='userinfo-avatar' type="userAvatarUrl"></open-data>
+    <open-data class='userinfo-nickname' type="userNickName">，你好</open-data>
+  </view>
+  
+  <view wx:if="{{hidewarning}}">
+    <view wx:if="{{canIUse}}">
+      <button style='margin-left:80rpx;margin-right:80rpx;margin-bottom:30rpx;margin-top:30rpx;' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+      <button style='background-color:grey;margin-bottom:30rpx;margin-left:80rpx;margin-right:80rpx;' bindtap="nobindGetUserInfo">匿名看看</button>
+      <view >
+      <text style='font-size:15px;display:flex;justify-content:center;'>*为方便展示你的头像和昵称，请点击授权登录</text>
+      </view>
+      
+    </view>
+    <view wx:else>请升级微信版本</view>
+  </view>
+  <view wx:else style='text-align:center;font-size:15px'>
+    <view>
+    <text >你的帐号可能存在违规操作</text>
+    </view>
+    <view>
+    <text >请联系管理员(微信号731854938)进行解封</text>
+    </view>
+  </view>
+
+</view>

@@ -16,6 +16,7 @@ Page({
    */
   onLoad: function (options) {
     if (app.globalData.inputimg){
+      console.log(app.globalData.inputimg)
       this.setData({
         totalnum:app.globalData.totalnum,
         avatar: app.globalData.avatar,
@@ -23,7 +24,7 @@ Page({
         moneyqr: app.globalData.moneyqr
       })
     }else{
-
+      console.log("noinputimg")
     }
   },
 

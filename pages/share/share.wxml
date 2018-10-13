@@ -1,14 +1,11 @@
 <view>
-     <view class='bg-img'>
+     <!-- <view class='bg-img'>
        <image src='/images/share-bg.png' ></image> 
-
-    </view> 
-     <!-- <image src='/images/background.jpg' ></image>  -->
+    </view>  -->
     <view class="canvas-box">
         <canvas  style="width: {{windowWidth}}px;height: {{windowHeight}}px;z-index:-1;position:absolute" canvas-id="myCanvas"/>
-
-     </view>
-
+    </view>
+    
     <view class='btn' > 
         <button style='margin:auto;'  bindtap="savePic">分享一下</button>
          <button style='margin:auto;'  bindtap='donate'>支持一下</button> 

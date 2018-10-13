@@ -28,185 +28,127 @@ Page({
     }
   },
   onLoad: function (options) {
-  if (options.cachedoor=='true'){
-    this.setData({
-      cachedoor:true
-    })
-  }else{
-    this.setData({
-      cachedoor: false
-    })
-    wx.showLoading({
-      title: '耐心等待几秒钟,答案马上揭晓...',
-    })
+    if (options.cachedoor=='true'){
+      this.setData({
+        cachedoor:true
+      })
+    }else{
+      this.setData({
+        cachedoor: false
+      })
+      wx.showLoading({
+        title: '耐心等待几秒钟,答案马上揭晓...',
+      })
 
-  }
-
+    }
     var that = this;
     app.globalData.sharepagedoor = true
   },
-
-//   onShow: function () {
-
-//     // wx.downloadFile({
-//     //   url: app.globalData.baseUrl + '/static/avatar/'+app.globalData.openid+'.jpg',
-//     //   success: function (res) {
-//     //    var avatarimg = res.tempFilePath
-
-//     //     wx.downloadFile({
-//     //       url: app.globalData.inputimg[0]['img'],
-//     //       success: function (res) {
-
-
-//             const ctx = wx.createCanvasContext('myCanvas');
-//             // var leftimg = app.globalData.headimgpath;
-//             // var rightimg = res.tempFilePath;
-//             var leftimg = '../../images/1.jpg'
-//             var rightimg = '../../images/3.jpg'
-
-//             // var avatar = avatarimg;
-//             var avatar = '../../images/2.jpg';
-
-//             var qrPath = '../../images/qrcode2.jpg'
-//             var bgImga = '../../images/back1.jpg'
-//             var similarpic = '../../images/similar.jpg'
-//             var picsize = 0.4
-//             // var nickname = app.globalData.nickname
-//             var nickname = 'xxxxxx'
-//             // var rate = app.globalData.rate
-//             var rate = '99%'
-//             // var humword = app.globalData.humword
-//             var humword = '哈哈,翻出了你的旧照'
-
-//             ctx.drawImage(bgImga, 0.05 * width, 0.05 * height, 0.9 * width, 0.9 * height); //背景
-//             ctx.drawImage(similarpic, 0.13 * width, 0.25 * width, 0.5*width, 0.11*width)
-//             ctx.font = "45px Arial";
-//             ctx.setFillStyle('red')
-//             ctx.fillText(rate, 0.65 * width, 0.35 * width);
-
-
-//             ctx.drawImage(leftimg, 0.07 * width, 0.25 * height, picsize * width, picsize * width);
-//             ctx.drawImage(rightimg, 0.53 * width, 0.25 * height, picsize * width, picsize * width);
-
-//             ctx.drawImage(avatar, 30, 0.3 * height + picsize * width, 60, 60);
-//             ctx.drawImage(qrPath, 0.65 * width, 0.65 * height + 20, 0.25 * width, 0.25 * width);
-
-//             ctx.font = "18rpx Arial";
-//             ctx.setFillStyle('#8B4789')
-//             ctx.fillText(nickname, 100, 0.3 * height + picsize * width+27)
-//             ctx.fillText(humword, 30, 0.3 * height + picsize * width+100);
-//             ctx.font = "12rpx Arial";
-//             ctx.setFillStyle('black');
-//             ctx.fillText('长按扫码查看和你最像的人', 40, 0.8 * height)
-//             ctx.draw()
-//       //     }
-//       //   })
-
-
-//       // }})
-
-// },
-
-
-
   onShow: function () {
+    console.log("share onshow")
+    if(this.data.cachedoor){
+      console.log("cachedoor")
+      var rightimgcache;
+      var avatarimgcache;
+      rightimgcache=wx.getStorageSync( 'rightimg' )
+
+      avatarimgcache=wx.getStorageSync( 'avatarimg')
+
+      const ctx = wx.createCanvasContext('myCanvas');
+      var leftimg = app.globalData.headimgpath;
+      var rightimg = rightimgcache;
+      var avatar = avatarimgcache;
+      var qrPath = '../../images/qrcode2.jpg'
+      var bgImga = '../../images/share222.jpg'
+      var similarpic = '../../images/similar.jpg'
+      var picsize = 0.4
+      var nickname = app.globalData.nickname
+      var rate = app.globalData.rate
+      var humword = app.globalData.humword
+      ctx.drawImage(bgImga,  0, 0,  width, height); //背景
+      ctx.drawImage(similarpic, 0.13 * width, 0.25 * width, 0.5 * width, 0.11 * width)
+      ctx.font = "45px Arial";
+      ctx.setFillStyle('red')
+      ctx.fillText(rate, 0.65 * width, 0.35 * width);
 
 
+      ctx.drawImage(leftimg, 0.07 * width, 0.25 * height, picsize * width, picsize * width);
+      ctx.drawImage(rightimg, 0.53 * width, 0.25 * height, picsize * width, picsize * width);
 
-  if(this.data.cachedoor){
-var rightimgcache;
-var avatarimgcache;
-    rightimgcache=wx.getStorageSync( 'rightimg' )
+      ctx.drawImage(avatar, 30, 0.3 * height + picsize * width, 60, 60);
+      ctx.drawImage(qrPath, 0.75 * width, 0.9 * height - 0.25 * width, 0.25 * width, 0.25 * width);
 
-    avatarimgcache=wx.getStorageSync( 'avatarimg')
+      ctx.font = "18rpx Arial";
+      ctx.setFillStyle('#8B4789')
+      ctx.fillText(nickname, 100, 0.3 * height + picsize * width + 27)
+      ctx.fillText(humword, 30, 0.3 * height + picsize * width + 100);
+      ctx.font = "12rpx Arial";
+      ctx.setFillStyle('white');
+      ctx.fillText('长按扫码查看和你最像的人', 40, 0.88 * height)
+      ctx.draw()
+    }else{
+      console.log("share onshow fail")
 
-            const ctx = wx.createCanvasContext('myCanvas');
-            var leftimg = app.globalData.headimgpath;
-            var rightimg = rightimgcache;
-            var avatar = avatarimgcache;
-            var qrPath = '../../images/qrcode2.jpg'
-            var bgImga = '../../images/share222.jpg'
-            var similarpic = '../../images/similar.jpg'
-            var picsize = 0.4
-            var nickname = app.globalData.nickname
-            var rate = app.globalData.rate
-            var humword = app.globalData.humword
-            ctx.drawImage(bgImga,  0, 0,  width, height); //背景
-            ctx.drawImage(similarpic, 0.13 * width, 0.25 * width, 0.5 * width, 0.11 * width)
-            ctx.font = "45px Arial";
-            ctx.setFillStyle('red')
-            ctx.fillText(rate, 0.65 * width, 0.35 * width);
+      wx.downloadFile({
+        url: app.globalData.baseUrl + '/static/avatar/' + app.globalData.openid + '.jpg',
+        success: function (res) {
+          var avatarimg = res.tempFilePath
 
+          wx.downloadFile({
+            url: app.globalData.inputimg[0]['img'],
+            success: function (res) {
+              setTimeout(function () {
+              }, 2 * 1000);
+              console.log(app.globalData.inputimg[0]['img'])
 
-            ctx.drawImage(leftimg, 0.07 * width, 0.25 * height, picsize * width, picsize * width);
-            ctx.drawImage(rightimg, 0.53 * width, 0.25 * height, picsize * width, picsize * width);
+              const ctx = wx.createCanvasContext('myCanvas');
+              var leftimg = app.globalData.headimgpath;
+              var rightimg = res.tempFilePath;
+              var avatar = avatarimg;
+              var qrPath = '../../images/qrcode2.jpg'
+              var bgImga = '../../images/share222.jpg'
+              var similarpic = '../../images/similar.jpg'
+              var picsize = 0.4
+              var nickname = app.globalData.nickname
+              var rate = app.globalData.rate
+              var humword = app.globalData.humword
 
-            ctx.drawImage(avatar, 30, 0.3 * height + picsize * width, 60, 60);
-            ctx.drawImage(qrPath, 0.75 * width, 0.9 * height - 0.25 * width, 0.25 * width, 0.25 * width);//////////////////////////////
-
-            ctx.font = "18rpx Arial";
-            ctx.setFillStyle('#8B4789')
-            ctx.fillText(nickname, 100, 0.3 * height + picsize * width + 27)
-            ctx.fillText(humword, 30, 0.3 * height + picsize * width + 100);
-            ctx.font = "12rpx Arial";
-            ctx.setFillStyle('white');////////////////////////////
-            ctx.fillText('长按扫码查看和你最像的人', 40, 0.88 * height)/////////////////////////////
-            ctx.draw()
-  }else{
-    wx.downloadFile({
-      url: app.globalData.baseUrl + '/static/avatar/' + app.globalData.openid + '.jpg',
-      success: function (res) {
-        var avatarimg = res.tempFilePath
-
-        wx.downloadFile({
-          url: app.globalData.inputimg[0]['img'],
-          success: function (res) {
+              ctx.drawImage(bgImga,0, 0,  width, height); 
+              ctx.drawImage(similarpic, 0.13 * width, 0.25 * width, 0.5 * width, 0.11 * width)
+              ctx.font = "45px Arial";
+              ctx.setFillStyle('red')
+              ctx.fillText(rate, 0.65 * width, 0.35 * width);
 
 
-            const ctx = wx.createCanvasContext('myCanvas');
-            var leftimg = app.globalData.headimgpath;
-            var rightimg = res.tempFilePath;
-            var avatar = avatarimg;
-            var qrPath = '../../images/qrcode2.jpg'
-            var bgImga = '../../images/share222.jpg'
-            var similarpic = '../../images/similar.jpg'
-            var picsize = 0.4
-            var nickname = app.globalData.nickname
-            var rate = app.globalData.rate
-            var humword = app.globalData.humword
+              ctx.drawImage(leftimg, 0.07 * width, 0.25 * height, picsize * width, picsize * width);
+              ctx.drawImage(rightimg, 0.53 * width, 0.25 * height, picsize * width, picsize * width);
 
-            ctx.drawImage(bgImga,0, 0,  width, height); 
-            ctx.drawImage(similarpic, 0.13 * width, 0.25 * width, 0.5 * width, 0.11 * width)
-            ctx.font = "45px Arial";
-            ctx.setFillStyle('red')
-            ctx.fillText(rate, 0.65 * width, 0.35 * width);
+              ctx.drawImage(avatar, 30, 0.3 * height + picsize * width, 60, 60);
+              ctx.drawImage(qrPath, 0.75 * width, 0.9 * height - 0.25 * width, 0.25 * width, 0.25 * width);
 
-
-            ctx.drawImage(leftimg, 0.07 * width, 0.25 * height, picsize * width, picsize * width);
-            ctx.drawImage(rightimg, 0.53 * width, 0.25 * height, picsize * width, picsize * width);
-
-            ctx.drawImage(avatar, 30, 0.3 * height + picsize * width, 60, 60);
-            ctx.drawImage(qrPath, 0.75 * width, 0.9 * height - 0.25 * width, 0.25 * width, 0.25 * width);
-
-            ctx.font = "18rpx Arial";
-            ctx.setFillStyle('#8B4789')
-            ctx.fillText(nickname, 100, 0.3 * height + picsize * width + 27)
-            ctx.fillText(humword, 30, 0.3 * height + picsize * width + 100);
-            ctx.font = "12rpx Arial";
-            ctx.setFillStyle('white');////////////////////////////
-            ctx.fillText('长按扫码查看和你最像的人', 40, 0.88 * height)/////////////////////////////
-            ctx.draw()
-            wx.hideLoading()
-            wx.setStorageSync("rightimg", rightimg)
-            wx.setStorageSync("avatarimg",avatarimg)
-          }
-        })
+              ctx.font = "18rpx Arial";
+              ctx.setFillStyle('#8B4789')
+              ctx.fillText(nickname, 100, 0.3 * height + picsize * width + 27)
+              ctx.fillText(humword, 30, 0.3 * height + picsize * width + 100);
+              ctx.font = "12rpx Arial";
+              ctx.setFillStyle('white');
+              ctx.fillText('长按扫码查看和你最像的人', 40, 0.88 * height)
+              ctx.draw()
+              wx.hideLoading()
+              wx.setStorageSync("rightimg", rightimg)
+              wx.setStorageSync("avatarimg",avatarimg)
+            },
+            fail:function(res){
+              console.log("download fail")
+              console.log(res)
+            }
+          })
 
 
-      }
-    })
+        }
+      })
 
-  }
+    }
 
 
   },

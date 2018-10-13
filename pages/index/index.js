@@ -15,7 +15,8 @@ Page({
     index: 0,
     items: [
       { name: 'prank', value: '整蛊版', checked: 'true' },
-      { name: 'normal', value: '正常版' },
+      { name: 'normal', value: '素人版' },
+      { name: 'star', value: '明星版' },
     ],
     prank: true,
     sharepagedoor: app.globalData.sharepagedoor
@@ -25,19 +26,30 @@ Page({
   radioChange: function (e) {
     if (e.detail.value == 'normal') {
       app.globalData.prank = false
+      app.globalData.star = false
       app.globalData.items = [
         { name: 'prank', value: '整蛊版' },
-        { name: 'normal', value: '正常版', checked: 'true' },
+        { name: 'normal', value: '素人版', checked: 'true' },
+        { name: 'star', value: '明星版' },
       ]
 
-    } else {
+    } else if (e.detail.value == 'prank'){
       app.globalData.prank = true
+      app.globalData.star = false
       app.globalData.items = [
         { name: 'prank', value: '整蛊版', checked: 'true' },
-        { name: 'normal', value: '正常版' },
+        { name: 'normal', value: '素人版' },
+        { name: 'star', value: '明星版' },
       ]
-
-
+    }
+    else if (e.detail.value == 'star') {
+      app.globalData.star = true
+      app.globalData.prank = false
+      app.globalData.items = [
+        { name: 'prank', value: '整蛊版' },
+        { name: 'normal', value: '素人版' },
+        { name: 'star', value: '明星版', checked: 'true' },
+      ]
     }
   },
 
@@ -86,7 +98,7 @@ Page({
         'avatar': app.globalData.avatar
       },
       success: function (res) {
-
+        console.log("upload success")
         close = true
         if (res.data == 'userid is not avaiable') {
           wx.showToast({
@@ -127,7 +139,7 @@ Page({
       },
     })
     wx.showToast({
-      title: '玩命匹配中~',
+      title: '等待15秒~',
     }, 6000)
     minus(this)
   },
@@ -166,11 +178,7 @@ Page({
           })
           that.setData({ chooseimagebut: false })
         }
-
-
         else {
-
-
           if (resultimg == 'no head') {
             wx.showToast({
               title: '照片中无人脸',
@@ -191,10 +199,6 @@ Page({
 
               }
             })
-
-
-
-
           } else {
             app.globalData.inputimg = resultimg;
             app.globalData.totalnum = result.totalnum;
@@ -215,10 +219,102 @@ Page({
       },
     })
     wx.showToast({
-      title: '玩命匹配中~',
+      title: '等待15秒~',
     },6000)
     minus(this)
   },
+
+
+
+
+
+
+
+
+
+
+  starsearch: function () {
+    this.setData({
+      showIf: 'show'
+    })
+    var that = this
+    close = false
+    timer = 48
+    var data1 = app.globalData.headimgpath;
+
+    wx.uploadFile({
+      url: app.globalData.baseUrl + '/staruploadimg/',
+      filePath: data1,
+      name: 'file',
+      formData: {
+        'userid': app.globalData.openid,
+        'nickname': app.globalData.nickname,
+        'avatar': app.globalData.avatar
+      },
+      success: function (res) {
+
+        close = true
+
+        var result = JSON.parse(res.data)
+        var resultimg = result.msg
+        var signal = result.signal
+        var test = result.test
+        if (result.msg == '400') {
+          wx.showToast({
+            title: '服务器升级中...',
+          })
+          that.setData({ chooseimagebut: false })
+        }
+        else {
+          if (resultimg == 'no head') {
+            wx.showToast({
+              title: '照片中无人脸',
+              duration: 4000
+            })
+
+          } else if (signal == 'false') {
+            wx.showToast({
+              title: '未找到匹配照',
+              duration: 4000
+            })
+            app.globalData.inputimg = resultimg;
+            app.globalData.rate = result.msg[0].rate;
+            app.globalData.humword = result.msg[0].humword
+            wx.navigateTo({
+              url: '../share/share',
+              success: function () {
+
+              }
+            })
+          } else {
+            app.globalData.inputimg = resultimg;
+            app.globalData.totalnum = result.totalnum;
+            app.globalData.rate = result.msg[0].rate;
+            app.globalData.humword = result.msg[0].humword
+            wx.navigateTo({
+              url: '../share/share',
+              success: function () {
+              }
+            })
+          }
+          that.setData({ chooseimagebut: false })
+
+        }
+
+      },
+      fail: function (res) {
+      },
+    })
+    wx.showToast({
+      title: '等待15秒~',
+    }, 6000)
+    minus(this)
+  },
+
+
+
+
+
 
 
   onShow: function () {
@@ -231,75 +327,36 @@ Page({
   },
 
 
+
   onLoad: function (options) {
     var that = this
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: res => {
-
-              app.globalData.userInfo = res.userInfo
-              app.globalData.avatar = res.userInfo.avatarUrl
-
-              if (app.userInfoReadyCallback) {
-                app.userInfoReadyCallback(res)
-              }
-            }, complete: function (res) {
-            }
-          })
-        }
-        else {
-          wx.getUserInfo({
-            success: function (res) {
-              loading(that)
-              app.globalData.avatar = res.userInfo.avatarUrl
-              that.onShow()
-
-            },
-            fail: function () {
-              wx.showModal({
-                cancelText: '拒绝授权',
-                confirmText: '确定授权',
-                title: '提示',
-                content: '如果您继续点击拒绝授权,将无法体验。',
-                success: function (res) {
-                  if (res.confirm) {
-                    wx.openSetting({
-                      success: (res) => {
-                        res.authSetting["scope.userInfo"] = true
-                        if (res.authSetting["scope.userInfo"]) {
-                          wx.getUserInfo({
-                            success: function (res) {
-                              loading(that)
-                              app.globalData.avatar = res.userInfo.avatarUrl
-                              that.onShow()
-                            }
-                          })
-                        }
-                      }, fail: function (res) {
-
-                      }
-                    })
-                  } else {
-                    wx.redirectTo({
-                      url: '../index/index'
-                    })
-                  }
+    if (options.startsearch == null) {
+      wx.getSetting({
+        success: function (res) {
+          if (res.authSetting['scope.userInfo']) {
+            wx.getUserInfo({
+              success: res => {
+                app.globalData.userInfo = res.userInfo
+                app.globalData.avatar = res.userInfo.avatarUrl
+                app.globalData.nickname = res.userInfo.nickName
+                if (app.userInfoReadyCallback) {
+                  app.userInfoReadyCallback(res)
                 }
-              })
-            }
+              }, complete: function (res) {
 
-          })
-
+              }
+            })
+          }
+          else {
+            wx.navigateTo({
+              url: '/pages/getuserinfo/getuserinfo',
+            })
+          }
+        },
+        fail: function (res) {
         }
-
-      }
-    })
-
-
-
-
+      })
+    }
 
 
 
@@ -307,16 +364,13 @@ Page({
       that.setData({ chooseimagebut: true })
       if (app.globalData.prank) {
         this.pranksearch()
-      } else {
+      } else if (app.globalData.star) {
+        this.starsearch()
+      }else{
         this.search()
       }
-
     } else {
-
       loading(that)
-
-
-
       if (app.globalData.userInfo) {
         this.setData({
           headimgpath: app.globalData.headimgpath,
@@ -385,7 +439,7 @@ function minus(that) {
         scrollimage: app.globalData.scrollimage
       })
       minus(that)
-    }, 20)
+    }, 100)
   }
 }
 

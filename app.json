@@ -4,8 +4,8 @@
     "pages/index/index",
     "pages/result/result",
     "pages/upload/upload",
-    "pages/share/share"
-
+    "pages/share/share",
+    "pages/getuserinfo/getuserinfo"
 
   ],
   "window": {
